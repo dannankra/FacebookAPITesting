@@ -15,16 +15,16 @@ public class User {
 	}
 	public Response getName(){
 	    
-    	Response response = getResponseFromEndPoint("me", "id,name");
+    	Response response = getResponseFromEndPoint("me", "id, name", TokenManager.get_about_me_Token());
     	return response;
 	}
 	
-	public Response getResponseFromEndPoint(String endpt, String qry){
+	public Response getResponseFromEndPoint(String endpt, String qry, String token){
 		   
     	Response response = client.target(Facebook.getBaseUrl())
 				  .path(endpt)
 				  .queryParam("fields", qry)
-		    	  .queryParam("access_token", TokenManager.get_about_me_Token())
+		    	  .queryParam("access_token", token)
 		    	  .request(MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML)
 		    	  .get();
     	return response;
