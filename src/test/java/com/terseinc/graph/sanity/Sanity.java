@@ -10,11 +10,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.terseinc.graph.TokenManager;
 import com.terseinc.graph.endpoints.User;
 
 public class Sanity {
 	public User user;
 	public JSONObject obj;
+	public String aboutMeToken = TokenManager.get_about_me_Token();
 	final static Logger logger = Logger.getLogger(Sanity.class);
 
 	@BeforeClass
@@ -73,7 +75,7 @@ public class Sanity {
     public void TestThatIfNoFieldsAreSpecifiedForTheMeEndPointTheIDAndNameOfCurrentUserIsReturned(){
     	 String endpoint = "me";
     	 String fieldQuery = "";
-	     Response response = user.getResponseFromEndPoint(endpoint, fieldQuery);
+	     Response response = user.getResponseFromEndPoint(endpoint, fieldQuery, aboutMeToken);
 	     String body = response.readEntity(String.class);
 	     Assert.assertEquals(200, response.getStatus());
 	     
